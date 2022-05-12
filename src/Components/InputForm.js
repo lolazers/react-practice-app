@@ -1,11 +1,14 @@
 import React from 'react';
 import { useState } from 'react';
 import styled from 'styled-components';
+import Button from './Button';
+import ErrorCard from './ErrorCard';
 
 const Div = styled.div`
   background: white;
   border-radius: 10px;
   padding: 1rem;
+  position: relative;
 `;
 const Form = styled.form`
   & div {
@@ -30,14 +33,6 @@ const Form = styled.form`
     border-color: purple;
   }
 `;
-const Button = styled.button`
-  background: purple;
-  padding: 0.4rem 1rem;
-  color: rgba(255, 255, 255, 0.9);
-  border: none;
-  cursor: pointer;
-`;
-
 const InputForm = (props) => {
   const [username, setUsername] = useState('');
   const [age, setAge] = useState('');
@@ -68,8 +63,9 @@ const InputForm = (props) => {
           <label>Age (Years)</label>
           <input type="number" value={age} onChange={ageHandler} />
         </div>
-        <Button>Add User</Button>
+        <Button text="Add User" />
       </Form>
+      <ErrorCard />
     </Div>
   );
 };

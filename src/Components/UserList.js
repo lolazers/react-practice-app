@@ -11,6 +11,7 @@ const Div = styled.div`
   & div {
     border: 1px solid #ddd;
     padding: 0.5rem;
+    margin-bottom: 0.5rem;
   }
 `;
 
