@@ -36,17 +36,19 @@ const Div = styled.div`
 
 const ErrorCard = (props) => {
   return (
-    <Div>
-      <div>
-        <p>Invalid Input</p>
-      </div>
-      <div>
-        <p>Please enter a valid age</p>
-      </div>
-      <div>
-        <Button text="Okay" />
-      </div>
-    </Div>
+    <div>
+      <Div>
+        <div>
+          <p>Invalid Input</p>
+        </div>
+        <div>
+          <p>{props.message}</p>
+        </div>
+        <div>
+          <Button closeError={props.closeError} text="Okay" />
+        </div>
+      </Div>
+    </div>
   );
 };
 

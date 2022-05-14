@@ -3,6 +3,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import Button from './Button';
 import ErrorCard from './ErrorCard';
+import ErrorBackground from './ErrorBackground';
 
 const Div = styled.div`
   background: white;
@@ -36,12 +37,25 @@ const Form = styled.form`
 const InputForm = (props) => {
   const [username, setUsername] = useState('');
   const [age, setAge] = useState('');
+  const [isError, setIsError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const usernameHandler = (e) => setUsername(e.target.value);
   const ageHandler = (e) => setAge(e.target.value);
 
   const submitHandler = (e) => {
     e.preventDefault();
+
+    if (username === '' || age === '') {
+      setErrorMessage('Please enter a valid name and age (non-empty values).');
+      return setIsError(true);
+    }
+
+    if (parseInt(age) < 0) {
+      setErrorMessage('Please enter a valid age (>0).');
+      return setIsError(true);
+    }
+
     const userData = {
       id: Math.random(),
       username: username,
@@ -50,6 +64,11 @@ const InputForm = (props) => {
     props.onUserInput(userData);
     setUsername('');
     setAge('');
+  };
+
+  const closeErrorHandler = () => {
+    setErrorMessage('');
+    setIsError(false);
   };
 
   return (
@@ -65,7 +84,10 @@ const InputForm = (props) => {
         </div>
         <Button text="Add User" />
       </Form>
-      <ErrorCard />
+      {isError && <ErrorBackground closeError={closeErrorHandler} />}
+      {isError && (
+        <ErrorCard closeError={closeErrorHandler} message={errorMessage} />
+      )}
     </Div>
   );
 };

@@ -8,7 +8,7 @@ import UserList from './Components/UserList';
 
 const ParentDiv = styled.div`
   width: 95%;
-  margin: auto;
+  margin: 2rem auto;
 `;
 
 const App = () => {
